@@ -1,4 +1,4 @@
-from accountDB import AccountDB
+
 #so this is where i want the basic account system to be, how you can have a username, id and password,
 #i can work on possible encryption later, but i need to link it to a database sometime soon of userIDs
 #if i can create a list of accounts, that would be great, but for now, userIDs would suffice

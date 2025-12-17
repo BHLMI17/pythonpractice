@@ -15,14 +15,25 @@ class AccountDB:
     # accounts = Accounts[]
     accounts = []
 
-    def __init__(self, accountList, chosenAccount):
-        self.accounts = accountList
-        self.selectedAccount = chosenAccount
-        # self.selectedAccount = chosenAccount
+    # def __init__(self, accountList, chosenAccount):
+    #     self.accounts = accountList
+    #     self.selectedAccount = chosenAccount
+    #     # self.selectedAccount = chosenAccount
+
+    #@classmethod makes it so that the method can be called on the class itself
+    #instead of an instance of the class itself
+    #uses cls instead of self for the first param
+    @classmethod
+    #so i will use AccountDB.storeAccount() to refer to the method here
+    def storeAccount(cls, account: Accounts):
+        #so instead of self, use cls to refer to the instance of the class
+        account.account_id = len(cls.accounts)
+        cls.accounts.append(account)
 
 
-    def returnSystem(self):
-        return self.accounts
+    @classmethod
+    def returnSystem(cls):
+        return cls.accounts
         
 
     # def storeAccount(self, selectedAccount = Accounts()):
