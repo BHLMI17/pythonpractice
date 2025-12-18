@@ -10,14 +10,18 @@ class Accounts:
 
 
     def __init__(self, username, password):
+        self.account_id = None
         self.account_username = username
         self.account_password = password
+
+    def __repr__(self):
+        return f"<Account {self.account_id}: {self.account_username}>"
+
 
     
 
 
-    # def storeAccount(self):
-    #     AccountDB.accounts.append(self)
+    
 
 
 
