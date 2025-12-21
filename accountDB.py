@@ -52,6 +52,13 @@ class AccountDB:
 
         #ok end product idea is to basically have an account added to the database 1 of 2 ways
         #storeAccount(each parameter) or storeAccount(accountname)
+
+
+        #ok, what if i make it so that instead of using a list in python, i use a txt file
+        #so that the data is persistent between runs of the program
+        #so i would need it to both read and write to the file
+        #would be a good opportunity to also sort out searching and indexing algorithms
+        #but i would want to encrypt the passwords in some way, perhaps a cipher or hash function
     
 
 
