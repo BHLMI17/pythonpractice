@@ -29,10 +29,22 @@ class AccountDB:
 
     @classmethod
     def returnSystem(cls):
-        return cls.accounts
+        #use len method for the amount of accounts, use just cls.accounts to return the list
+        return len(cls.accounts)
+    
+
+
+    #how to make the memory consistent between different times of running main?
         
 
-    
+    @classmethod
+    def accountCreate(self):
+        newUsername = input("Enter your desired username: ")
+        newPassword = input("Enter your desired password: ")
+        self.account_username = newUsername
+        self.account_password = newPassword
+        self.storeAccount(Accounts(newUsername, newPassword))
+        print("Account created successfully!")
     
 
    

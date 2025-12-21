@@ -3,7 +3,7 @@
 #i can work on possible encryption later, but i need to link it to a database sometime soon of userIDs
 #if i can create a list of accounts, that would be great, but for now, userIDs would suffice
 class Accounts:
-    #havent tested this out yet, think if im right, this will set the type and also set it to null
+   
     account_id =  None
     account_username =  None
     account_password =  None
@@ -19,7 +19,6 @@ class Accounts:
 
 
     
-
 
     
 

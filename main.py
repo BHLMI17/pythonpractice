@@ -21,6 +21,13 @@ import sklearn as skl
 
 
 
-account1 = Accounts("bilal", "apple1")
-AccountDB.storeAccount(account1)
-print(AccountDB.accounts)
+# account1 = Accounts("bilal", "apple1")
+# AccountDB.storeAccount(account1)
+# print(AccountDB.accounts)
+
+# account2 = Accounts("john", "smith2")
+# AccountDB.storeAccount(account2)
+
+AccountDB.accountCreate()
+# print(AccountDB.accounts)
+print(AccountDB.returnSystem())
