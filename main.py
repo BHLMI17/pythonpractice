@@ -1,4 +1,5 @@
 from room import Room
+from testingtxt import alterCSV
 from account_system import Accounts
 from accountDB import AccountDB
 import numpy as np
@@ -28,6 +29,17 @@ import sklearn as skl
 # account2 = Accounts("john", "smith2")
 # AccountDB.storeAccount(account2)
 
-AccountDB.accountCreate()
-# print(AccountDB.accounts)
-print(AccountDB.returnSystem())
+# AccountDB.accountCreate()
+# # print(AccountDB.accounts)
+# print(AccountDB.returnSystem())
+
+#initialize alterCSV class with the filename
+csvfile = alterCSV('test1.csv')
+# #read first 5 rows from the csv file
+# data = csvfile.ReadCSV(5)
+# #print out the data read from the csv file
+# print(data)
+#ok lets now try to use my function to find the next available id
+# nextID = csvfile.determineNextAvailableID()
+# print(nextID)
+csvfile.WriteCSV('john', 'password123')
