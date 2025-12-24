@@ -42,4 +42,6 @@ csvfile = alterCSV('test1.csv')
 #ok lets now try to use my function to find the next available id
 # nextID = csvfile.determineNextAvailableID()
 # print(nextID)
-csvfile.WriteCSV('john', 'password123')
+# csvfile.AppendCSV('john', 'password123')
+# csvfile.AppendCSV('james', 'james123')
+csvfile.AppendCSV('liam', 'liam123')
