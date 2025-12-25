@@ -34,14 +34,15 @@ import sklearn as skl
 # print(AccountDB.returnSystem())
 
 #initialize alterCSV class with the filename
-csvfile = alterCSV('test1.csv')
-# #read first 5 rows from the csv file
-# data = csvfile.ReadCSV(5)
-# #print out the data read from the csv file
-# print(data)
-#ok lets now try to use my function to find the next available id
-# nextID = csvfile.determineNextAvailableID()
-# print(nextID)
-# csvfile.AppendCSV('john', 'password123')
-# csvfile.AppendCSV('james', 'james123')
-csvfile.AppendCSV('liam', 'liam123')
+# csvfile = alterCSV('test1.csv')
+# # #read first 5 rows from the csv file
+# # data = csvfile.ReadCSV(5)
+# # #print out the data read from the csv file
+# # print(data)
+# #ok lets now try to use my function to find the next available id
+# # nextID = csvfile.determineNextAvailableID()
+# # print(nextID)
+# # csvfile.AppendCSV('john', 'password123')
+# # csvfile.AppendCSV('james', 'james123')
+# csvfile.AppendCSV('liam', 'liam123')#
+alterCSV.removeAccount()

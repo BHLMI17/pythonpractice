@@ -3,6 +3,7 @@ import csv
 import pandas as pd
 import os
 
+
 class alterCSV:
     #ok so these lines allow you to write to a csv file, but i imagine if i change the mode to 'a' it will append instead of overwrite
     #similarly, changing mode to 'r' will allow reading
@@ -42,7 +43,15 @@ class alterCSV:
             writer.writerow(data)
 
 
-
+    @classmethod
+    def removeAccount(self):
+        decision = input(str("would you like to search for the choose by username or ID?"))
+        if decision == "username":
+            username = input("please enter the username")
+            with open(self.inputfile, mode='r', newline='') as file:
+                usernameReader = csv.reader(file)
+                if username in row[1]:
+            
 
 
 
@@ -62,8 +71,13 @@ class alterCSV:
     #do i wanna focus on the encryption next or the security by making sure that multiple accounts can not have the same name 
     #it would be similar to a set in that regard
     #i could also work on the way to make sure that if you write on the csv, it ensures the header column is there, 
-    #might be able to do that by making a refresh database method that just writes the column headers and nothing else        
-
+    #might be able to do that by making a refresh database method that just writes the column headers and nothing else  
+    # crap, first thing should probably run a check to see if each id is unique 
+    # and then maybe make a way to remove an individual id
+    # a way to search up an account by id or username would be useful too      
+    # would be similar to a map's way of searching for an item, by searching for the key and finding the value with it
+    # should there be a way to also have the csv file rearrange itself after by having pointers,
+    # but that would be more similar to a linked list
 
 
             
