@@ -9,7 +9,7 @@ class alterCSV:
     #similarly, changing mode to 'r' will allow reading
     # with open('testfile.csv', mode='w', newline='') as file:
     #     writer = csv.writer(file)
-    inputfile = None, csv
+    inputfile = None
 
     
     def __init__(self, inputcsv):
@@ -43,15 +43,45 @@ class alterCSV:
             writer.writerow(data)
 
 
-    @classmethod
+    #note that this used to be a class method, 
+    # however this caused errors with compilation, as it determined that the self.inputfile was still set as none
+    #much later down the line, but i might want to make it so that if i get a GUI, 
+    # i end making a button that would allow any csv file to be instantiated, 
+    # perhaps creating a system that a user can just use a practically empty file and turn it into a csv password file
+    #then i could have a method that would instantiate the given column names onto an empty file, or offer to clear the file for them after
+    #whats meant to happen here is that the user is asked for the password, which then goes through a whole nother check to 
+    #to match the password to the username, but this is currently just for testing, so keep it like this for now
     def removeAccount(self):
-        decision = input(str("would you like to search for the choose by username or ID?"))
+        decision = input("would you like to search for the choose by username or ID? \n")
+
         if decision == "username":
-            username = input("please enter the username")
-            with open(self.inputfile, mode='r', newline='') as file:
-                usernameReader = csv.reader(file)
-                if username in row[1]:
-            
+            username = input("please enter the username \n")
+
+            df = pd.read_csv(self.inputfile)   # load CSV
+            foundAcc = df[df["username"].str.contains(username, na=False)]
+            foundAccDetails = foundAcc.iloc[:, :2]  # id + username only
+
+            if not foundAcc.empty:
+                print("Account found, account details are:\n" + foundAccDetails.to_string())
+
+                chosenAccPassword = input("please enter the password for the corresponding account you have selected \n")
+                correctPassword = foundAcc.iloc[0]["password"]
+
+                if chosenAccPassword == correctPassword:
+                    finalChoice = input("are you certain that you would like to delete the account? 'y' for yes and 'n' for no \n")
+
+                    if finalChoice.lower() == "y":
+                        row_index = foundAcc.index[0]   # exact row to delete
+                        df = df.drop(row_index)         # delete it
+                        df.to_csv(self.inputfile, index=False)  # save file
+                        print("Account deleted successfully")
+                    else:
+                        print("Deletion cancelled")
+                else:
+                    print("incorrect password")
+            else:
+                print("no account with that name found")
+                
 
 
 
@@ -59,6 +89,7 @@ class alterCSV:
     def determineNextAvailableID(self):
         # If file doesn't exist or is empty, start at 1
         #wtf does the os library do?
+        #this method is to be altered later to check for id differences >1 so that it can replace redundant ids
         
         if not os.path.exists(self.inputfile) or os.path.getsize(self.inputfile) == 0:
             return 1

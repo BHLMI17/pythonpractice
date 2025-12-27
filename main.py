@@ -34,7 +34,7 @@ import sklearn as skl
 # print(AccountDB.returnSystem())
 
 #initialize alterCSV class with the filename
-# csvfile = alterCSV('test1.csv')
+csvfile = alterCSV("test1.csv")
 # # #read first 5 rows from the csv file
 # # data = csvfile.ReadCSV(5)
 # # #print out the data read from the csv file
@@ -45,4 +45,4 @@ import sklearn as skl
 # # csvfile.AppendCSV('john', 'password123')
 # # csvfile.AppendCSV('james', 'james123')
 # csvfile.AppendCSV('liam', 'liam123')#
-alterCSV.removeAccount()
+csvfile.removeAccount()
