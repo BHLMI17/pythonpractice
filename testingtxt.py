@@ -58,14 +58,14 @@ class alterCSV:
             username = input("please enter the username \n")
 
             df = pd.read_csv(self.inputfile)   # load CSV
-            foundAcc = df[df["username"].str.contains(username, na=False)]
+            foundAcc = df[df["username"].str.contains(username, na=False)] #find the correct account by the keyword username and by the inputted username
             foundAccDetails = foundAcc.iloc[:, :2]  # id + username only
 
             if not foundAcc.empty:
-                print("Account found, account details are:\n" + foundAccDetails.to_string())
+                print("Account found, account details are:\n" + foundAccDetails.to_string()) #output the account details to make sure that the user can affirm
 
-                chosenAccPassword = input("please enter the password for the corresponding account you have selected \n")
-                correctPassword = foundAcc.iloc[0]["password"]
+                chosenAccPassword = input("please enter the password for the corresponding account you have selected \n") # 2FA (sort of)
+                correctPassword = foundAcc.iloc[0]["password"] # find the value in the row "password" in the first column that has the corresponding account
 
                 if chosenAccPassword == correctPassword:
                     finalChoice = input("are you certain that you would like to delete the account? 'y' for yes and 'n' for no \n")
