@@ -14,17 +14,20 @@ class alterCSV:
 
 
 
-    @classmethod
-    def initialiseCSV(cls, name ):
-        filename = name+".csv"
-        path = 'C:/github projects/java/pythonpractice'
-        with open(os.path.join(path, filename),'w') as file:
-          writer = csv.writer(file, delimiter=',', quotechar="|",quoting=csv.QUOTE_MINIMAL)  
-          basic_info = ["id","username","password"]
-          writer.writerow(basic_info)
-        print("new file "+ name + ".csv created")
-        # so what now then? I think i want to create a new file with a certain name            
-        print(filename)
+    # @classmethod
+    # def initialiseCSV(cls):
+    #     name = input("please enter the name of the csv file you would like to create (without the .csv extension) \n")
+    #     filename = name+".csv"
+    #     path = os.getcwd()
+    #     with open(os.path.join(path, filename),'w') as file:
+    #       writer = csv.writer(file, delimiter=',', quotechar="|",quoting=csv.QUOTE_MINIMAL)  
+    #       basic_info = ["id","username","password"]
+    #       writer.writerow(basic_info)
+    #     print("new file "+ name + ".csv created")
+    #     cls.inputfile = filename
+    #     # so what now then? I think i want to create a new file with a certain name            
+    #     print(filename)
+        
 
 
     
@@ -76,9 +79,12 @@ class alterCSV:
 
         if decision.lower() == "username":
             self.removebyUsername()
-        else:
+        elif decision.lower() == "id":
             self.removebyID()
         
+
+    def __init__():
+        pass
         
 
 
@@ -118,7 +124,7 @@ class alterCSV:
     def removebyID(self):
         id = input("please enter the id \n")
         df = pd.read_csv(self.inputfile)   # load CSV
-        foundAcc = df[df["id"].str.contains(id, na=False)] #find the correct account by the keyword username and by the inputted username
+        foundAcc = df[df["id"].astype(str).str.contains(id, na=False)] #find the correct account by the keyword id and by the inputted id
         foundAccDetails = foundAcc.iloc[:, :2]  # id + username only
 
         if not foundAcc.empty:
