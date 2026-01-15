@@ -34,7 +34,11 @@ import sklearn as skl
 # print(AccountDB.returnSystem())
 
 #initialize alterCSV class with the filename
-csvfile = alterCSV("test1.csv")
+# csvfile = alterCSV("test1.csv")
+testcsv = alterCSV
+testcsv.initialiseCSV("simon")
+# alterCSV.initialiseCSV("james")
+
 # # #read first 5 rows from the csv file
 # # data = csvfile.ReadCSV(5)
 # # #print out the data read from the csv file
@@ -42,7 +46,7 @@ csvfile = alterCSV("test1.csv")
 # #ok lets now try to use my function to find the next available id
 # # nextID = csvfile.determineNextAvailableID()
 # # print(nextID)
-# # csvfile.AppendCSV('john', 'password123')
-# # csvfile.AppendCSV('james', 'james123')
-# csvfile.AppendCSV('liam', 'liam123')#
-csvfile.removeAccount()
+# csvfile.AppendCSV('john', 'password123')
+# csvfile.AppendCSV('james', 'james123')
+# csvfile.AppendCSV('liamS', 'liam123')
+# csvfile.removeAccount()

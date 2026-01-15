@@ -10,6 +10,22 @@ class alterCSV:
     # with open('testfile.csv', mode='w', newline='') as file:
     #     writer = csv.writer(file)
     inputfile = None
+    
+
+
+
+    @classmethod
+    def initialiseCSV(cls, name ):
+        filename = name+".csv"
+        path = 'C:/github projects/java/pythonpractice'
+        with open(os.path.join(path, filename),'w') as file:
+          writer = csv.writer(file, delimiter=',', quotechar="|",quoting=csv.QUOTE_MINIMAL)  
+          basic_info = ["id","username","password"]
+          writer.writerow(basic_info)
+        print("new file "+ name + ".csv created")
+        # so what now then? I think i want to create a new file with a certain name            
+        print(filename)
+
 
     
     def __init__(self, inputcsv):
@@ -54,33 +70,78 @@ class alterCSV:
     def removeAccount(self):
         decision = input("would you like to search for the choose by username or ID? \n")
 
-        if decision == "username":
-            username = input("please enter the username \n")
+        while decision.lower() not in ("username", "id"):
+            print("not a valid option, try again")
+            decision = input("would you like to search for the choose by username or ID? \n")
 
-            df = pd.read_csv(self.inputfile)   # load CSV
-            foundAcc = df[df["username"].str.contains(username, na=False)] #find the correct account by the keyword username and by the inputted username
-            foundAccDetails = foundAcc.iloc[:, :2]  # id + username only
+        if decision.lower() == "username":
+            self.removebyUsername()
+        else:
+            self.removebyID()
+        
+        
 
-            if not foundAcc.empty:
-                print("Account found, account details are:\n" + foundAccDetails.to_string()) #output the account details to make sure that the user can affirm
 
-                chosenAccPassword = input("please enter the password for the corresponding account you have selected \n") # 2FA (sort of)
-                correctPassword = foundAcc.iloc[0]["password"] # find the value in the row "password" in the first column that has the corresponding account
 
-                if chosenAccPassword == correctPassword:
-                    finalChoice = input("are you certain that you would like to delete the account? 'y' for yes and 'n' for no \n")
 
-                    if finalChoice.lower() == "y":
-                        row_index = foundAcc.index[0]   # exact row to delete
-                        df = df.drop(row_index)         # delete it
-                        df.to_csv(self.inputfile, index=False)  # save file
-                        print("Account deleted successfully")
-                    else:
-                        print("Deletion cancelled")
+    def removebyUsername(self):
+        username = input("please enter the username \n")
+
+        df = pd.read_csv(self.inputfile)   # load CSV
+        foundAcc = df[df["username"].str.contains(username, na=False)] #find the correct account by the keyword username and by the inputted username
+        foundAccDetails = foundAcc.iloc[:, :2]  # id + username only
+
+        if not foundAcc.empty:
+            print("Account found, account details are:\n" + foundAccDetails.to_string()) #output the account details to make sure that the user can affirm
+
+            chosenAccPassword = input("please enter the password for the corresponding account you have selected \n") # 2FA (sort of)
+            correctPassword = foundAcc.iloc[0]["password"] # find the value in the row "password" in the first column that has the corresponding account
+
+            if chosenAccPassword == correctPassword:
+                finalChoice = input("are you certain that you would like to delete the account? 'y' for yes and 'n' for no \n")
+
+                if finalChoice.lower() == "y":
+                    row_index = foundAcc.index[0]   # exact row to delete
+                    df = df.drop(row_index)         # delete it
+                    df.to_csv(self.inputfile, index=False)  # save file
+                    print("Account deleted successfully")
                 else:
-                    print("incorrect password")
+                    print("Deletion cancelled")
             else:
-                print("no account with that name found")
+                print("incorrect password")
+        else:
+            print("no account with that name found")
+
+
+
+
+    def removebyID(self):
+        id = input("please enter the id \n")
+        df = pd.read_csv(self.inputfile)   # load CSV
+        foundAcc = df[df["id"].str.contains(id, na=False)] #find the correct account by the keyword username and by the inputted username
+        foundAccDetails = foundAcc.iloc[:, :2]  # id + username only
+
+        if not foundAcc.empty:
+            print("Account found, account details are:\n" + foundAccDetails.to_string()) #output the account details to make sure that the user can affirm
+
+            chosenAccPassword = input("please enter the password for the corresponding account you have selected \n") # 2FA (sort of)
+            correctPassword = foundAcc.iloc[0]["password"] # find the value in the row "password" in the first column that has the corresponding account
+
+            if chosenAccPassword == correctPassword:
+                finalChoice = input("are you certain that you would like to delete the account? 'y' for yes and 'n' for no \n")
+
+                if finalChoice.lower() == "y":
+                    row_index = foundAcc.index[0]   # exact row to delete
+                    df = df.drop(row_index)         # delete it
+                    df.to_csv(self.inputfile, index=False)  # save file
+                    print("Account deleted successfully")
+                else:
+                    print("Deletion cancelled")
+            else:
+                print("incorrect password")
+        else:
+            print("no account with that id found")
+            
                 
 
 
@@ -89,6 +150,7 @@ class alterCSV:
     def determineNextAvailableID(self):
         # If file doesn't exist or is empty, start at 1
         #wtf does the os library do?
+        #ok, os library is exactly like it sounds, helps with os functionality
         #this method is to be altered later to check for id differences >1 so that it can replace redundant ids
         
         if not os.path.exists(self.inputfile) or os.path.getsize(self.inputfile) == 0:
