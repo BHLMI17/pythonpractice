@@ -11,4 +11,4 @@ testingcsvfile = alterCSV("test1.csv")
 # data = testingcsvfile.ReadCSV(5)
 # print(data)
 
-testingcsvfile.adjustNextAvailableID()
+print(testingcsvfile.adjustNextAvailableID())

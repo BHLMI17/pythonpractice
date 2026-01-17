@@ -152,50 +152,48 @@ class alterCSV:
 
 
 
-    def adjustNextAvailableID(self):
-        # plan here is for this to set a more global variable for the next available id value,
-        #  or for this to replace the current method
-        # pass 
-        # with open(self.inputfile, newline='') as csvfile:
-        #     reader = csv.reader(csvfile, quotechar='"', delimiter=',')
-
-        # df = pd.read_csv(self.inputfile, usecols=['id'])
-
-
-        # for i in range(1, len(df)):
-        #     if(df[i] + 1 < df[i +1]):
-        #         nextAvailableID = df[i] + 1
-        # return nextAvailableID
-
-
     
-        with open(self.inputfile) as f:
-            reader = csv.DictReader(f)
-            ids = [line['id'] for line in reader]
-
-        print(ids)
-
-        
-            
-            
-            
-                
 
 
 
 
-    def determineNextAvailableID(self, currentSelectedID):
+    def determineNextAvailableID(self):
         # If file doesn't exist or is empty, start at 1
         #wtf does the os library do?
         #ok, os library is exactly like it sounds, helps with os functionality
         #this method is to be altered later to check for id differences >1 so that it can replace redundant ids
         
-        if not os.path.exists(self.inputfile) or os.path.getsize(self.inputfile) == 0:
-            return 1
+        # if not os.path.exists(self.inputfile) or os.path.getsize(self.inputfile) == 0:
+        #     return 1
 
-        df = pd.read_csv(self.inputfile)
-        return len(df) + 1   
+        # df = pd.read_csv(self.inputfile)
+        # return len(df) + 1   
     
+         with open(self.inputfile) as f:
+            reader = csv.DictReader(f)
+            #so this sorts all the ids into a 
+            #my previous issue here was me turning it into a map instead of a row, 
+            # and tried iterating over something that shouldnt have worked
+            ids = sorted(int(row['id']) for row in reader)
+            #check if the first value is >1 so it can save time
+            if(ids[0] > 1):
+                nextAvailableID = 1
+            #if is not 1, then start checking for the gap
+            else:
+                for i in range(len(ids) - 1):
+                    # Detect a gap larger than 1
+                    if ids[i] + 1 < ids[i + 1]:
+                        nextAvailableID = ids[i] + 1
+                        break
+                    
+
+                    
+
+                    else:
+                        # No gaps found → append at the end
+                        nextAvailableID = ids[-1] + 1
+
+            return nextAvailableID
     
     
 
