@@ -158,18 +158,9 @@ class alterCSV:
 
 
     def determineNextAvailableID(self):
-        # If file doesn't exist or is empty, start at 1
-        #wtf does the os library do?
-        #ok, os library is exactly like it sounds, helps with os functionality
-        #this method is to be altered later to check for id differences >1 so that it can replace redundant ids
-        
-        # if not os.path.exists(self.inputfile) or os.path.getsize(self.inputfile) == 0:
-        #     return 1
-
-        # df = pd.read_csv(self.inputfile)
-        # return len(df) + 1   
+          
     
-         with open(self.inputfile) as f:
+        with open(self.inputfile) as f:
             reader = csv.DictReader(f)
             #so this sorts all the ids into a 
             #my previous issue here was me turning it into a map instead of a row, 
@@ -199,8 +190,8 @@ class alterCSV:
                         nextAvailableID = ids[-1] + 1
 
             return nextAvailableID
-    
-    
+
+
 
 
     #do i wanna focus on the encryption next or the security by making sure that multiple accounts can not have the same name 
