@@ -159,12 +159,22 @@ class alterCSV:
         # with open(self.inputfile, newline='') as csvfile:
         #     reader = csv.reader(csvfile, quotechar='"', delimiter=',')
 
-        df = pd.read_csv(self.inputfile, usecols=['id'])
+        # df = pd.read_csv(self.inputfile, usecols=['id'])
 
-        for i in range(len(df)):
-            if(df[i] + 1 < df[i +1]):
-                nextAvailableID = df[i] + 1
-        return nextAvailableID
+
+        # for i in range(1, len(df)):
+        #     if(df[i] + 1 < df[i +1]):
+        #         nextAvailableID = df[i] + 1
+        # return nextAvailableID
+
+
+    
+        with open(self.inputfile) as f:
+            reader = csv.DictReader(f)
+            ids = [line['id'] for line in reader]
+
+        print(ids)
+
         
             
             
