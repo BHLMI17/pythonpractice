@@ -41,7 +41,7 @@ class alterCSV:
         with open(self.inputfile, mode='r', newline='') as file:
             reader = csv.reader(file)
             rows = []
-            if self.determineNextAvailableID == 1:
+            if (self.determineNextAvailableID == -1):
                 print("no rows in the csv file")
             for i, row in enumerate(reader):
                 if i >= numberOfRows:
@@ -176,7 +176,12 @@ class alterCSV:
             # and tried iterating over something that shouldnt have worked
             ids = sorted(int(row['id']) for row in reader)
             #check if the first value is >1 so it can save time
-            if(ids[0] > 1):
+
+            if(len(ids) == 0):
+                nextAvailableID = -1
+
+
+            elif(ids[0] > 1):
                 nextAvailableID = 1
             #if is not 1, then start checking for the gap
             else:

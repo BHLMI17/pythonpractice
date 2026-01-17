@@ -7,8 +7,8 @@ import pandas as pd
 #important note, when running this main file, make sure you are in this directory, not the more external directory
 #otherwise the csv file will not be found upon initialization
 
-testingcsvfile = alterCSV("test1.csv")
+testingcsvfile = alterCSV("emptytester.csv")
 # data = testingcsvfile.ReadCSV(5)
 # print(data)
 
-print(testingcsvfile.adjustNextAvailableID())
+print(testingcsvfile.determineNextAvailableID())
