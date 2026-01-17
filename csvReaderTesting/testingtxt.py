@@ -10,7 +10,9 @@ class alterCSV:
     # with open('testfile.csv', mode='w', newline='') as file:
     #     writer = csv.writer(file)
     inputfile = None
-    
+
+
+    nextAvailableID  = None
 
 
 
@@ -83,8 +85,8 @@ class alterCSV:
             self.removebyID()
         
 
-    def __init__():
-        pass
+    # def __init__():
+    #     pass
         
 
 
@@ -147,13 +149,32 @@ class alterCSV:
                 print("incorrect password")
         else:
             print("no account with that id found")
+
+
+
+    def adjustNextAvailableID(self):
+        # plan here is for this to set a more global variable for the next available id value,
+        #  or for this to replace the current method
+        # pass 
+        # with open(self.inputfile, newline='') as csvfile:
+        #     reader = csv.reader(csvfile, quotechar='"', delimiter=',')
+
+        df = pd.read_csv(self.inputfile, usecols=['id'])
+
+        for i in range(len(df)):
+            if(df[i] + 1 < df[i +1]):
+                nextAvailableID = df[i] + 1
+        return nextAvailableID
+        
+            
+            
             
                 
 
 
 
 
-    def determineNextAvailableID(self):
+    def determineNextAvailableID(self, currentSelectedID):
         # If file doesn't exist or is empty, start at 1
         #wtf does the os library do?
         #ok, os library is exactly like it sounds, helps with os functionality
@@ -164,6 +185,8 @@ class alterCSV:
 
         df = pd.read_csv(self.inputfile)
         return len(df) + 1   
+    
+    
     
 
 
